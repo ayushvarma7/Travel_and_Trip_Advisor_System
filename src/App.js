@@ -12,7 +12,7 @@ const App= ()=> {
 
   const [places, setPlaces]=useState([]);
   const [coordinates, setCoordinates]=useState({});
-  const [bounds, setBounds]=useState(null);
+  const [bounds, setBounds]=useState({});
 
   // useeffect to get the user loc on opening the app
   useEffect(()=>{
@@ -24,7 +24,7 @@ const App= ()=> {
 
   useEffect(()=>{
     // console.log(coordinates, bounds);     
-    getPlacesData()   //.then since it is async function
+    getPlacesData(bounds.sw, bounds.ne)   //.then since it is async function
             .then((data)=>{
               console.log(data);
               setPlaces(data);
