@@ -1,45 +1,44 @@
 import React, { useState } from "react";
 import { CircularProgress, Grid, Typography, InputLabel, MenuItem, FormControl, Select } from "@material-ui/core";
 
-import CARD from '../PlaceDetails/PlaceDetails';
 
 import useStyles from './styles';
 import PlaceDetails from "../PlaceDetails/PlaceDetails";
 
-const List = () =>{
+const List = ({places}) =>{
     const classes=useStyles();
     const [type, setType]= useState('Restaurants');
     const [rating, setRating]=useState('');
 
     //places now
-    const places=[{
-        name:'Cool Place'
-    },
-    {
-        name:'Hello Moto'
-    },
-    {
-        name:'Yello'
-    },
-    {
-        name:'Cool Place'
-    },
-    {
-        name:'Hello Moto'
-    },
-    {
-        name:'Yello'
-    },
-    {
-        name:'Cool Place'
-    },
-    {
-        name:'Hello Moto'
-    },
-    {
-        name:'Yello'
-    },
-];
+//     const places=[{
+//         name:'Cool Place'
+//     },
+//     {
+//         name:'Hello Moto'
+//     },
+//     {
+//         name:'Yello'
+//     },
+//     {
+//         name:'Cool Place'
+//     },
+//     {
+//         name:'Hello Moto'
+//     },
+//     {
+//         name:'Yello'
+//     },
+//     {
+//         name:'Cool Place'
+//     },
+//     {
+//         name:'Hello Moto'
+//     },
+//     {
+//         name:'Yello'
+//     },
+// ];
 
     return (
         <div className={classes.container}>
@@ -61,7 +60,7 @@ const List = () =>{
                     <MenuItem value={4.5}>Above 4.5</MenuItem>
                 </Select>
             </FormControl>
-            <Grid spacing={3} className={classes.list}>
+            <Grid container spacing={3} className={classes.list}>
                 {places?.map((place, i)=>(
                     <Grid item key={i} xs={12}>
                         <PlaceDetails place={place} />
