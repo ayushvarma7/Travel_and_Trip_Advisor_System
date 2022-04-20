@@ -5,40 +5,12 @@ import { CircularProgress, Grid, Typography, InputLabel, MenuItem, FormControl, 
 import useStyles from './styles';
 import PlaceDetails from "../PlaceDetails/PlaceDetails";
 
-const List = ({places}) =>{
+const List = ({places, childClicked}) =>{
     const classes=useStyles();
     const [type, setType]= useState('Restaurants');
     const [rating, setRating]=useState('');
 
-    //places now
-//     const places=[{
-//         name:'Cool Place'
-//     },
-//     {
-//         name:'Hello Moto'
-//     },
-//     {
-//         name:'Yello'
-//     },
-//     {
-//         name:'Cool Place'
-//     },
-//     {
-//         name:'Hello Moto'
-//     },
-//     {
-//         name:'Yello'
-//     },
-//     {
-//         name:'Cool Place'
-//     },
-//     {
-//         name:'Hello Moto'
-//     },
-//     {
-//         name:'Yello'
-//     },
-// ];
+   console.log({childClicked});
 
     return (
         <div className={classes.container}>
