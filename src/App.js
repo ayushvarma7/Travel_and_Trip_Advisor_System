@@ -16,6 +16,8 @@ const App= ()=> {
   // LIFTING THE STATE UP METHOD for childClicked
   const [childClicked, setChildClicked]=useState(null);//to check which button is clicked 
 
+  const [isLoading, setIsLoading]= useState(false);
+
   // useeffect to get the user loc on opening the app
   useEffect(()=>{
     // browser gets our geolocation immediately 
@@ -25,11 +27,13 @@ const App= ()=> {
   },[]); //since dependency array [] is empty, so getplacesdata is called only once
 
   useEffect(()=>{
-    // console.log(coordinates, bounds);     
+    setIsLoading(true);
+    console.log(coordinates, bounds);     
     getPlacesData(bounds.sw, bounds.ne)   //.then since it is async function
             .then((data)=>{
               console.log(data);
               setPlaces(data);
+              setIsLoading(false);
             })
   },[coordinates, bounds]); //since dependency array [] has bounds and coords, so getplacesdata is called everytime these change
 
@@ -41,7 +45,7 @@ const App= ()=> {
         <Grid item xs={12} md={4}>
           <List places={places}
                 childClicked={childClicked}
-                
+                isLoading={isLoading}
           />
         </Grid>
 

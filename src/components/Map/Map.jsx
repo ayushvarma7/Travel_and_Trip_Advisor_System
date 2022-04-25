@@ -47,7 +47,7 @@ const Map = ({setCoordinates, setBounds, coordinates, places, setChildClicked}) 
                                         <Typography>
                                             <img 
                                             className={classes.pointer} 
-                                            src= {place.photo ? place.photo.images.large.url : 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cmVzdGF1cmFudHxlbnwwfHwwfHw%3D&w=1000&q=80'} 
+                                            src= {place.photo ? place.photo.images.small.url : 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cmVzdGF1cmFudHxlbnwwfHwwfHw%3D&w=1000&q=80'} 
                                             alt={place.name} />
                                         </Typography>
                                         <Rating size="small" value={Number(place.rating)} readOnly />

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { Autocomplete } from "@react-google-maps/api";
 import { AppBar, Toolbar, Typography, InputBase, Box } from "@material-ui/core";
 import SearchIcon from '@material-ui/icons/Search';
@@ -7,12 +7,34 @@ import useStyles from './styles';
 
 const Header = () =>{
 
+    const [quote, setQuote]= useState('Loading...');
+    const [author, setAuthor]= useState('Loading...');
+
+    // const randomQuote= ()=>{
+    //     fetch("https://api.quotable.io/random").then(res=>res.json()).then(result=>{
+    //         // console.log(result);
+    //         setQuote(result.content);
+    //         setAuthor(result.author);
+    //     })
+    // }
+
+    async function getQuotes(){
+        const result=await fetch("https://api.quotable.io/random");
+        setQuote(result.content);
+        setAuthor(result.author);
+    }
+
+    useEffect(()=>{
+        getQuotes();
+    },[])
+
     const classes = useStyles();
     return (
         <AppBar position="static">
+            {/* {getQuotes} */}
             <Toolbar className={classes.toolbar}>
                 <Typography variant="h5" className={classes.title}>
-                    Trip Advisor
+                    Trip Advisor {quote}
                 </Typography>
                 <Box display="flex">
                 <Typography variant="h6" className={classes.title}>
