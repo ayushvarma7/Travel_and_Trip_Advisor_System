@@ -34,16 +34,18 @@ const App= ()=> {
   },[]); //since dependency array [] is empty, so getplacesdata is called only once
 
   // RUNS WHEN THERE IS SOME CHANGE IN THESE DEPENDENCY
-  // useEffect(()=>{
-  //   setIsLoading(true);
-  //   // console.log(coordinates, bounds);     
-  //   getPlacesData(type, rating, bounds.sw, bounds.ne)   //.then since it is async function
-  //           .then((data)=>{
-  //             // console.log(data);
-  //             setPlaces(data);
-  //             setIsLoading(false);
-  //           })
-  // },[type, coordinates, bounds]); //since dependency array [] has bounds and coords, so getplacesdata is called everytime these change
+  useEffect(()=>{
+    if(bounds.sw && bounds.ne){
+    setIsLoading(true);
+    // console.log(coordinates, bounds);     
+    getPlacesData(type, bounds.sw, bounds.ne)   //.then since it is async function
+            .then((data)=>{
+              // console.log(data);
+              setPlaces(data?.filter((place)=>place.name && place.num_reviews > 0));
+              setIsLoading(false);
+            })
+     }
+  },[type, bounds]); //since dependency array [] has bounds and coords, so getplacesdata is called everytime these change
 
   useEffect(()=>{
     const filterPlaces= places.filter((place)=>place.rating > rating);
@@ -60,7 +62,7 @@ const App= ()=> {
             .then((data)=>{
               // console.log(data);
               setFilteredPlaces([]); //reset filteredPlaces data
-              setPlaces(data);
+              setPlaces(data.filter((place)=>place.name && place.num_reviews > 0));
               setIsLoading(false);
             })
   }
@@ -68,7 +70,7 @@ const App= ()=> {
   return (
     <>
       <CssBaseline/>
-      <Header getInfo={getInfo} />
+      <Header getInfo={getInfo} setCoordinates={setCoordinates} />
       <Grid container spacing ={3} style={{width:'100%'}}>
         <Grid item xs={12} md={4}>
           <List places={filteredPlaces.length ? filteredPlaces : places}

@@ -5,10 +5,21 @@ import SearchIcon from '@material-ui/icons/Search';
 
 import useStyles from './styles';
 
-const Header = ({getInfo}) =>{
+const Header = ({getInfo, setCoordinates}) =>{
 
     const [quote, setQuote]= useState('Loading...');
     const [author, setAuthor]= useState('Loading...');
+    const [autoComplete, setAutoComplete] = useState(null);
+
+    const onLoad=(autoC)=>     setAutoComplete(autoC);
+    
+
+    const onPlacedChange=()=>{ //lays out lat/lng of searched place 
+        const latitude= autoComplete.getPlace().geometry.location.lat();
+        const longitude= autoComplete.getPlace().geometry.location.lng();
+
+        setCoordinates({lat:latitude, lng:longitude});
+    }
 
     // const randomQuote= ()=>{
     //     fetch("https://api.quotable.io/random").then(res=>res.json()).then(result=>{
@@ -41,7 +52,7 @@ const Header = ({getInfo}) =>{
                 <Typography variant="h6" className={classes.title}>
                     Explore new places!
                 </Typography>
-                {/* <Autocomplete> */}
+                {/* <Autocomplete onLoad={onLoad} onPlaceChanged={onPlacedChange}> */}
                     <div className={classes.search}>
                         <div className={classes.searchIcon}>
                             <SearchIcon/>
@@ -54,7 +65,7 @@ const Header = ({getInfo}) =>{
 
         </AppBar>
     );
-}
+} 
 
 
 export default Header;
