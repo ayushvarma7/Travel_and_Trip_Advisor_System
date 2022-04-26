@@ -5,7 +5,7 @@ import SearchIcon from '@material-ui/icons/Search';
 
 import useStyles from './styles';
 
-const Header = () =>{
+const Header = ({getInfo}) =>{
 
     const [quote, setQuote]= useState('Loading...');
     const [author, setAuthor]= useState('Loading...');
@@ -33,6 +33,7 @@ const Header = () =>{
         <AppBar position="static">
             {/* {getQuotes} */}
             <Toolbar className={classes.toolbar}>
+                <button onClick={getInfo} >Press to get info!</button>
                 <Typography variant="h5" className={classes.title}>
                     Trip Advisor {quote}
                 </Typography>
